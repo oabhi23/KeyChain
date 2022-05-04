@@ -14,7 +14,10 @@ public class TokenizeUtils {
     }
 
     public static String detokenizeData(String tokenizedValue) throws Exception {
-        return EncryptionDecryptionAES.decrypt(tokenizedValue, retrieveKey());
+        if (retrieveKey() == null) {
+            return EncryptionDecryptionAES.decrypt(tokenizedValue, retrieveKey());
+        }
+        return "No value found with this token.";
     }
 
     public static SecretKey generateKey() throws NoSuchAlgorithmException, IOException {
